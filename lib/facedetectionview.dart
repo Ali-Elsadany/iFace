@@ -1,13 +1,18 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:facerecognition_flutter/core/utils/app_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:facesdk_plugin/facedetection_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:facesdk_plugin/facesdk_plugin.dart';
+import 'core/utils/app_assets.dart';
+import 'main.dart';
 import 'person.dart';
+
+        // Screen el identify
 
 // ignore: must_be_immutable
 class FaceRecognitionView extends StatefulWidget {
@@ -143,8 +148,14 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
         return true;
       },
       child: Scaffold(
+        backgroundColor: AppColor.secondary,
         appBar: AppBar(
-          title: const Text('Face Recognition'),
+          backgroundColor: AppColor.primary,
+          leading: IconButton(onPressed: (){
+      Navigator.pop(context);
+      },
+        icon: const Icon(Icons.arrow_back,color: AppColor.stringColor,),),
+          title: const Text('Face Recognition',style: TextStyle(color: AppColor.stringColor),),
           toolbarHeight: 70,
           centerTitle: true,
         ),
@@ -189,7 +200,7 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      const Text('Enrolled')
+                                      const Text('Enrolled',style: TextStyle(color: AppColor.stringColor),)
                                     ],
                                   )
                                 : const SizedBox(
@@ -210,7 +221,7 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      const Text('Identified')
+                                      const Text('Identified',style: TextStyle(color: AppColor.stringColor))
                                     ],
                                   )
                                 : const SizedBox(
@@ -222,33 +233,49 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
                           height: 10,
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const SizedBox(
                               width: 16,
                             ),
-                            Text(
-                              'Identified: $_identifiedName',
-                              style: const TextStyle(fontSize: 18),
+
+                            /// check image
+                            SizedBox(
+                                height: 200,
+                                width: 200,
+                                child: Image.asset(AppAssets.check,color: AppColor.stringColor,)
                             )
+
+/*
+                            Text(
+                              'Name: Ali Elsadany',
+                              style: TextStyle(color: AppColor.stringColor,fontSize: 18),
+                            )
+                            */
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
+
+
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const SizedBox(
+                            SizedBox(
                               width: 16,
                             ),
+
+                            /// ID Goes Here
+
                             Text(
-                              'Similarity: $_identifiedSimilarity',
-                              style: const TextStyle(fontSize: 18),
+                              'Attendance Taken Successfully!',
+                              style: TextStyle(color: AppColor.stringColor,fontSize: 18),
                             )
                           ],
                         ),
+
                         const SizedBox(
                           height: 10,
                         ),
+                        /*
                         Row(
                           children: [
                             const SizedBox(
@@ -260,9 +287,11 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
                             )
                           ],
                         ),
+                        */
                         const SizedBox(
                           height: 10,
                         ),
+                        /*
                         Row(
                           children: [
                             const SizedBox(
@@ -274,9 +303,11 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
                             )
                           ],
                         ),
+                        */
                         const SizedBox(
                           height: 10,
                         ),
+                        /*
                         Row(
                           children: [
                             const SizedBox(
@@ -288,9 +319,11 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
                             )
                           ],
                         ),
+                        */
                         const SizedBox(
                           height: 10,
                         ),
+                        /*
                         Row(
                           children: [
                             const SizedBox(
@@ -302,16 +335,22 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
                             )
                           ],
                         ),
+                        */
                         const SizedBox(
                           height: 16,
+                        ),
+                        const SizedBox(
+                          height: 100,
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                Theme.of(context).colorScheme.primaryContainer,
+                                AppColor.primary,
                           ),
-                          onPressed: () => faceRecognitionStart(),
-                          child: const Text('Try again'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('SUBMIT another person',style: TextStyle(color: AppColor.stringColor),),
                         ),
                       ]),
                 )),
@@ -321,6 +360,8 @@ class FaceRecognitionViewState extends State<FaceRecognitionView> {
     );
   }
 }
+
+        /// Face detection
 
 class FaceDetectionView extends StatefulWidget
     implements FaceDetectionInterface {
@@ -372,6 +413,8 @@ class _FaceDetectionViewState extends State<FaceDetectionView> {
   }
 }
 
+    /// 7dood el wsh
+
 class FacePainter extends CustomPainter {
   dynamic faces;
   double livenessThreshold;
@@ -393,10 +436,10 @@ class FacePainter extends CustomPainter {
         Color color = const Color.fromARGB(0xff, 0xff, 0, 0);
         if (face['liveness'] < livenessThreshold) {
           color = const Color.fromARGB(0xff, 0xff, 0, 0);
-          title = "Spoof" + face['liveness'].toString();
+          title = "Recognizing Face..." + face['liveness'].toString();
         } else {
           color = const Color.fromARGB(0xff, 0, 0xff, 0);
-          title = "Real " + face['liveness'].toString();
+          title = "Recognized " + face['liveness'].toString();
         }
 
         TextSpan span =

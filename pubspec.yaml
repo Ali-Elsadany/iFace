@@ -38,6 +38,7 @@ dependencies:
   facesdk_plugin:
     path: ./facesdk_plugin
   flutter_exif_rotation: ^0.5.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,7 @@ dev_dependencies:
   sqflite:
   fluttertoast:
   shared_preferences:
+  flutter_screenutil: ^5.9.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -68,11 +70,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/ic_kby.png
-    - assets/ic_skype.png
-    - assets/ic_telegram.png
-    - assets/ic_whatsapp.png
-    - assets/ic_github.png
+
+    - assets/Face Logo.jpg
+    - assets/Rectangle 2.png
+    - assets/check.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
