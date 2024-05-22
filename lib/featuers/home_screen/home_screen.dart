@@ -288,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   Future<void> sendEmail(String email) async {
     final response = await http.get(
-      Uri.parse('https://a706-197-43-8-98.ngrok-free.app/auth/attendance'),      /// API Goes Here
+      Uri.parse('https://2487-156-210-179-228.ngrok-free.app/auth/attendance'),      /// API Goes Here
 
     );
 
