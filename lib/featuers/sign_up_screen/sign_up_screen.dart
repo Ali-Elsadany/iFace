@@ -195,7 +195,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       /// Call your API here
 
-      final apiUrl = 'https://2487-156-210-179-228.ngrok-free.app/auth/register'; // Replace with your API endpoint
+      final apiUrl = 'https://24ec-197-54-131-80.ngrok-free.app/auth/register'; // Replace with your API endpoint
 
       try {
         final response = await http.post(

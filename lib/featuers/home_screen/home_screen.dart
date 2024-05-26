@@ -188,8 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             // hnb3t 3ala el email hna
 
                                             if (formKey.currentState!.validate()) {
-                                              String email = _emailController.text.trim();
-                                              sendEmail(email);
+                                              sendEmail(_emailController.text);
                                             }
                                           },
                                             style: ElevatedButton.styleFrom(
@@ -287,9 +286,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   Future<void> sendEmail(String email) async {
-    final response = await http.get(
-      Uri.parse('https://2487-156-210-179-228.ngrok-free.app/auth/attendance'),      /// API Goes Here
-
+    final url = Uri.parse('https://24ec-197-54-131-80.ngrok-free.app/auth/attendance');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: '{"doctorEmail": "$email"}',
     );
 
     if (response.statusCode == 200) {
